@@ -54,9 +54,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private Recipe getPerfectGuacamoleRecipe() {
         String description = "Perfect Guacamole";
-        int prepTime = 10;
-        int cookTime = 20;
-        int servings = 3;
+        Integer prepTime = 10;
+        Integer cookTime = 20;
+        Integer servings = 3;
         String source = "Simply Receipes";
         String url = "https://www.simplyrecipes.com/recipes/perfect_guacamole";
         String direction = "1 Cut avocado, remove flesh" +
@@ -65,7 +65,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 "\n4 Cover with plastic and chill to store";
         Difficulty difficulty = Difficulty.EASY;
         String path = CLASSPATH + "static/img/guacamole.jpg"; // new ClassPathResource("static/img/guacamole.jpg").getPath();
-        byte[] image = new Image().getBytesByPaty(path);
+        Byte[] image = new Image().getBytesByPaty(path);
 
         Recipe recipe = new Recipe(description, prepTime, cookTime, servings, source, url, direction, difficulty, image);
 
@@ -98,7 +98,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 "\n5 Assemble the tacos";
         Difficulty difficulty = Difficulty.MODERATE;
         String path = CLASSPATH + "static/img/chicken-tacos.jpg";
-        byte[] image = new Image().getBytesByPaty(path);
+        Byte[] image = new Image().getBytesByPaty(path);
 
         Recipe recipe = new Recipe(description, prepTime, cookTime, servings, source, url, direction, difficulty, image);
 

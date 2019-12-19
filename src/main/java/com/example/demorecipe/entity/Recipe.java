@@ -3,6 +3,7 @@ package com.example.demorecipe.entity;
 import com.example.demorecipe.enums.Difficulty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,10 +15,10 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    private int prepTime;
-    private int cookTime;
-    private int servings;
+    @NotNull private String description;
+    private Integer prepTime;
+    private Integer cookTime;
+    private Integer servings;
     private String source;
     private String url;
 
@@ -29,7 +30,7 @@ public class Recipe {
     private Difficulty difficulty;
 
     @Lob
-    private byte[] image;
+    private Byte[] image;
 
     @OneToOne(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Note note;
@@ -46,8 +47,8 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String description, int prepTime, int cookTime, int servings, String source, String url,
-                  String direction, Difficulty difficulty, byte[] image) {
+    public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
+                  String direction, Difficulty difficulty, Byte[] image) {
         this.description = description;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
@@ -57,6 +58,10 @@ public class Recipe {
         this.direction = direction;
         this.difficulty = difficulty;
         this.image = image;
+    }
+
+    public Recipe(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -75,7 +80,7 @@ public class Recipe {
         this.description = description;
     }
 
-    public int getPrepTime() {
+    public Integer getPrepTime() {
         return prepTime;
     }
 
@@ -83,7 +88,7 @@ public class Recipe {
         this.prepTime = prepTime;
     }
 
-    public int getCookTime() {
+    public Integer getCookTime() {
         return cookTime;
     }
 
@@ -91,7 +96,7 @@ public class Recipe {
         this.cookTime = cookTime;
     }
 
-    public int getServings() {
+    public Integer getServings() {
         return servings;
     }
 
@@ -131,11 +136,11 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
-    public byte[] getImage() {
+    public Byte[] getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Byte[] image) {
         this.image = image;
     }
 
@@ -144,8 +149,10 @@ public class Recipe {
     }
 
     public void setNote(Note note) {
-        note.setRecipe(this);
-        this.note = note;
+        if (note != null) {
+            note.setRecipe(this);
+            this.note = note;
+        }
     }
 
     public Set<Ingredient> getIngredients() {
